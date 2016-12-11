@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: product-core-service
+  profiles:
+    active: docker
