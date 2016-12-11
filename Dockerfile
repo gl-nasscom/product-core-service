@@ -43,5 +43,5 @@ RUN ls
 #RUN ls
 
 RUN /bin/bash -c 'touch /tmp/app.jar'
-EXPOSE 8094
+EXPOSE 9094
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/tmp/app.jar"]

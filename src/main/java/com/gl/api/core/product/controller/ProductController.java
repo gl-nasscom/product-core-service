@@ -6,6 +6,8 @@ package com.gl.api.core.product.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -28,6 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.GsonBuilder;
 import com.gl.api.core.product.config.MicroserviceConfig;
+import com.gl.api.core.product.model.Product;
+import com.gl.api.core.product.model.SellerDetails;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -51,20 +55,38 @@ public class ProductController {
 
 
 	/**
-	 * @param wfType
-	 * @param tenantId
-	 * @param projectId
-	 * @param jsonBody
-	 * @return
+	 * @param message
 	 */
 	@ApiOperation(value = "Mocked API for test", notes = "Mocked API")
-	@RequestMapping(value = "/getMessage", method = RequestMethod.GET, produces = {
+	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Map<String, String>> getMessage(@RequestParam String message) {
+	public ResponseEntity<Map<String, String>> getTestMessage(@RequestParam String message) {
 		LOGGER.info("Controller processInit !");
 		Map<String, String> response = new HashMap<>();
 		response.put("response", "Hi this is mocked response for your message - " + message);
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	/**
+	 * @param customerId
+	 * @return
+	 */
+	@ApiOperation(value = "Get Product Details", notes = "Mocked API")	
+	@RequestMapping(value = "/{productId}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Product> getProduct(@PathVariable String productId) {
+
+		List<String> description = new ArrayList<String>();
+		description.add("Compact Design");
+		description.add("Corning Gorilla Glass");
+		description.add("High Quality Camera");
+		description.add("SlowMo recording");
+
+		//Mocked
+		SellerDetails mockedSeller = new SellerDetails("Inspire", true, "4.3", "5");
+
+		Product mockProduct = new Product("Iphone 7", "79999.00", "10%", true, "4.5", false, "img/iphone7.jpeg", description, mockedSeller);
+		return new ResponseEntity<Product>(mockProduct, HttpStatus.OK);
 	}
 
 
