@@ -44,7 +44,7 @@ import io.swagger.annotations.ApiOperation;
  */
 @Validated
 @RestController
-@RequestMapping("/api/core/product")
+@RequestMapping("/api/core/products")
 @Api("Product controller")
 public class ProductController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
